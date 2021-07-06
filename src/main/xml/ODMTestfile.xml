@@ -62,6 +62,7 @@
                         
 			<!-- ########## ***** ItemGroupDef ***** ########## -->
 			<ItemGroupDef OID="ItemGroupOID.1" Name="1.ItemGroup" Repeating="No">
+				<ItemRef ItemOID="ItemOID.1" Mandatory="Yes"/>
 				<ItemRef ItemOID="ItemOID.2" Mandatory="Yes"/>
 			</ItemGroupDef>
 			<ItemGroupDef OID="ItemGroupOID.2" Name="2.ItemGroup" Repeating="No">
@@ -149,12 +150,11 @@
 			<!-- ********************************************* -->
 			<!-- ****************** ItemDef ****************** -->
 			<ItemDef OID="ItemOID.1" Name="1.Item" DataType="integer" Length="5">
-				<CodeListRef CodeListOID="CodeList.at.integer.ei"/>
 				<Question><TranslatedText xml:lang="en">This is a question</TranslatedText></Question>
+				<CodeListRef CodeListOID="CodeList.at.integer.ei"/>
 			</ItemDef>
 			<ItemDef OID="ItemOID.2" Name="2.Item" DataType="float" Length="5" SignificantDigits="1" />
 			<ItemDef OID="ItemOID.3" Name="3.Item" DataType="text" Length="5">
-				<CodeListRef CodeListOID="CodeList.at.integer.ei"/>
 				<Question><TranslatedText xml:lang="en">This is also a question</TranslatedText></Question>
 			</ItemDef>
 			<ItemDef OID="ItemOID.rk.boolean"     Name="Boolean Item"      DataType="boolean" />

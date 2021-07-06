@@ -91,6 +91,9 @@
       <row>
         <gid><![CDATA[1]]></gid>
       </row>
+      <row>
+        <gid><![CDATA[2]]></gid>
+      </row>
     </rows>
   </groups>
   <group_l10ns>
@@ -98,6 +101,12 @@
       <row>
         <id><![CDATA[1]]></id>
         <gid><![CDATA[1]]></gid>
+        <group_name><![CDATA[1.ItemGroup]]></group_name>
+        <language><![CDATA[en]]></language>
+      </row>
+      <row>
+        <id><![CDATA[2]]></id>
+        <gid><![CDATA[2]]></gid>
         <group_name><![CDATA[2.ItemGroup]]></group_name>
         <language><![CDATA[en]]></language>
       </row>
@@ -109,7 +118,7 @@
         <qid><![CDATA[1]]></qid>
         <parent_qid><![CDATA[0]]></parent_qid>
         <gid><![CDATA[1]]></gid>
-        <type><![CDATA[N]]></type>
+        <type><![CDATA[A]]></type>
         <title><![CDATA[G1Q1]]></title>
         <mandatory><![CDATA[Y]]></mandatory>
         <question_order><![CDATA[1]]></question_order>
@@ -118,9 +127,19 @@
       <row>
         <qid><![CDATA[2]]></qid>
         <parent_qid><![CDATA[0]]></parent_qid>
-        <gid><![CDATA[1]]></gid>
+        <gid><![CDATA[2]]></gid>
+        <type><![CDATA[A]]></type>
+        <title><![CDATA[G2Q2]]></title>
+        <mandatory><![CDATA[Y]]></mandatory>
+        <question_order><![CDATA[1]]></question_order>
+        <relevance><![CDATA[1]]></relevance>
+      </row>
+      <row>
+        <qid><![CDATA[3]]></qid>
+        <parent_qid><![CDATA[0]]></parent_qid>
+        <gid><![CDATA[2]]></gid>
         <type><![CDATA[T]]></type>
-        <title><![CDATA[G1Q2]]></title>
+        <title><![CDATA[G2Q3]]></title>
         <mandatory><![CDATA[Y]]></mandatory>
         <question_order><![CDATA[1]]></question_order>
         <relevance><![CDATA[1]]></relevance>
@@ -141,6 +160,12 @@
       <row>
         <id><![CDATA[2]]></id>
         <qid><![CDATA[2]]></qid>
+        <question><![CDATA[This is a question]]></question>
+        <language><![CDATA[en]]></language>
+      </row>
+      <row>
+        <id><![CDATA[3]]></id>
+        <qid><![CDATA[3]]></qid>
         <question><![CDATA[This is also a question]]></question>
         <language><![CDATA[en]]></language>
       </row>

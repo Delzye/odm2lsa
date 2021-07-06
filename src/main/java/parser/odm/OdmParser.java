@@ -40,7 +40,7 @@ public class OdmParser
 
 			survey.setName(form.attributeValue("Name"));
 
-			HashMap<String, String> q_oids = parseItemGroups(form);
+			HashMap<String, List<String>> q_oids = parseItemGroups(form);
 			HashMap<String, List<String>> cl_oids = parseItems(form, q_oids);
 			parseCodeLists(form, cl_oids);
 
@@ -64,7 +64,7 @@ public class OdmParser
 		return survey;
 	}
 
-	private HashMap<String, String> parseItemGroups(Node form)
+	private HashMap<String, List<String>> parseItemGroups(Node form)
 	{
 		// List of all ItemGroupOIDs
 		ArrayList<String> ig_oids = new ArrayList<>();
@@ -87,7 +87,7 @@ public class OdmParser
 		// Add question groups and generate list of Items
 		HashMap<String, String> ig_map = new HashMap<>();
 		// Key: ItemOID Value: ItemGroupOID
-		HashMap<String, String> q_oids = new HashMap<>();
+		HashMap<String, List<String>> q_oids = new HashMap<>();
 
 		int x = 1;
 		@SuppressWarnings("unchecked")
@@ -116,14 +116,22 @@ public class OdmParser
 			
 			for (String q_ref : all_q_oids) {
 				log.debug("Putting Question " + q_ref + " into group " + x_str + "(" + ig.attributeValue("OID") + ")");
-				q_oids.put(q_ref, x_str);
+				List<String> l;
+				if ((l = q_oids.get(q_ref)) == null) {
+					l = new ArrayList<>();
+					l.add(x_str);
+					q_oids.put(q_ref, l);
+				} else {
+					l.add(x_str);
+				}
+
 			}
 			x++;
 		}
 		return q_oids;
 	}
 
-	private HashMap<String, List<String>> parseItems(Node form, HashMap<String, String> q_oids)
+	private HashMap<String, List<String>> parseItems(Node form, HashMap<String, List<String>> q_oids)
 	{
 		// List of all relevant Items
 		ArrayList<Element> items = new ArrayList<>();
@@ -141,8 +149,8 @@ public class OdmParser
 		HashMap<String, List<String>> cl_oids = new HashMap<>();
 		int x = 1;
 		for (Element item : items) {
-			String x_str = Integer.toString(x);
 			String desc = item.elementText("Description");
+			String oid = item.attributeValue("OID");
 
 			String type;
 			switch (item.attributeValue("DataType")) {
@@ -158,6 +166,10 @@ public class OdmParser
 					type = "";
 					log.warn("Question DataType not supported");
 			}
+			if (item.selectSingleNode("*[name()='CodeListRef']") != null) {
+				log.info(oid);
+				type = "A";
+			}
 
 			Element q_elem = (Element) item.selectSingleNode("*[name()='Question']/*[name()='TranslatedText']");
 			if (q_elem == null) {
@@ -167,24 +179,28 @@ public class OdmParser
 			String q_str = q_elem.getText();
 			String l = q_elem.attributeValue("lang");
 
-			Question q = new Question(x_str, q_oids.get(item.attributeValue("OID")), type, q_str, item.attributeValue("Name"), "Y", l);
-			q.setHelp(desc);
-			survey.addQuestion(q);
-			item_map.put(item.attributeValue("OID"), x_str);
-			
-			Element cl = (Element) item.selectSingleNode("*[name()='CodeListRef']");
-			if (cl != null) {
-				String cl_oid = cl.attributeValue("CodeListOID");
-				List<String> cl_oid_list = cl_oids.get(cl_oid);
-				if (cl_oid_list == null) {
-					ArrayList<String> new_list = new ArrayList<>();
-					new_list.add(x_str);
-					cl_oids.put(cl_oid, new_list);
-				} else {
-					cl_oid_list.add(x_str);
+			for (String gr : q_oids.get(oid)) {
+				String x_str = Integer.toString(x);
+
+				Question q = new Question(x_str, gr, type, q_str, item.attributeValue("Name"), "Y", l);
+				q.setHelp(desc);
+				survey.addQuestion(q);
+				item_map.put(item.attributeValue("OID"), x_str);
+
+				Element cl = (Element) item.selectSingleNode("*[name()='CodeListRef']");
+				if (cl != null) {
+					String cl_oid = cl.attributeValue("CodeListOID");
+					List<String> cl_oid_list = cl_oids.get(cl_oid);
+					if (cl_oid_list == null) {
+						ArrayList<String> new_list = new ArrayList<>();
+						new_list.add(x_str);
+						cl_oids.put(cl_oid, new_list);
+					} else {
+						cl_oid_list.add(x_str);
+					}
 				}
+				x++;
 			}
-			x++;
 		}
 		return cl_oids;
 	}
