@@ -1,0 +1,634 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ODM  xmlns="http://www.cdisc.org/ns/odm/v1.3" Description="File used for debugging" FileType="Snapshot" FileOID="Test ODM File" CreationDateTime="2017-03-15T00:00:00" ODMVersion="1.3" Originator="" SourceSystem="" SourceSystemVersion="">
+	<Study OID="TestStudyOID">
+		<!-- ***** GlobalVariables ***** -->
+		<GlobalVariables>
+			<StudyName>TestStudy</StudyName>
+			<StudyDescription/>
+			<ProtocolName>TestStudyProtocol</ProtocolName>
+		</GlobalVariables>
+
+		<!-- ***** MetaDataVersion ***** -->
+		<MetaDataVersion OID="TestMetaDataOID" Name="TestMetaData">
+			<!-- ***** Protocol ***** -->
+			<Protocol>
+				<StudyEventRef StudyEventOID="StudyEventOID.1" Mandatory="No"/>
+				<StudyEventRef StudyEventOID="StudyEventOID.2" Mandatory="No"/>
+				<StudyEventRef StudyEventOID="StudyEventOID.rk" Mandatory="No"/>
+				<StudyEventRef StudyEventOID="StudyEventOID.at" Mandatory="No"/>
+			</Protocol>
+
+			<!-- ***** StudyEventDef ***** -->
+			<StudyEventDef OID="StudyEventOID.1" Name="1.StudyEvent" Repeating="No" Type="Scheduled">
+				<FormRef FormOID="FormOID.1" Mandatory="No"/>
+				<FormRef FormOID="FormOID.2" Mandatory="No"/>
+				<FormRef FormOID="FormOID.np" Mandatory="No"/>
+			</StudyEventDef>
+			<StudyEventDef OID="StudyEventOID.2" Name="2.StudyEvent" Repeating="Yes" Type="Common">
+				<FormRef FormOID="FormOID.1" Mandatory="No"/>
+				<FormRef FormOID="FormOID.3" Mandatory="No"/>
+			</StudyEventDef>
+			<StudyEventDef OID="StudyEventOID.rk" Name="Repeat StudyEvent" Repeating="Yes" Type="Common">
+				<FormRef FormOID="FormOID.rk" Mandatory="No"/>
+			</StudyEventDef>
+			<StudyEventDef OID="StudyEventOID.at" Name="All Types StudyEvent" Repeating="Yes" Type="Common">
+				<FormRef FormOID="FormOID.at" Mandatory="No"/>
+			</StudyEventDef>
+
+			<!-- ########## ***** FormDef ***** ########## -->
+			<FormDef OID="FormOID.1" Name="1.Form" Repeating="No">
+				<ItemGroupRef ItemGroupOID="ItemGroupOID.1" Mandatory="Yes"/>
+				<ItemGroupRef ItemGroupOID="ItemGroupOID.2" Mandatory="No"/>
+			</FormDef>
+			<FormDef OID="FormOID.2" Name="2.Form" Repeating="No">
+				<ItemGroupRef ItemGroupOID="ItemGroupOID.1" Mandatory="No"/>
+				<ItemGroupRef ItemGroupOID="ItemGroupOID.3" Mandatory="No"/>
+			</FormDef>
+			<FormDef OID="FormOID.3" Name="3.Form" Repeating="Yes">
+				<ItemGroupRef ItemGroupOID="ItemGroupOID.2" Mandatory="No"/>
+				<ItemGroupRef ItemGroupOID="ItemGroupOID.3" Mandatory="No"/>
+			</FormDef>
+			<FormDef OID="FormOID.np" Name="Empty Form" Repeating="Yes">
+			</FormDef>
+			<FormDef OID="FormOID.rk" Name="Repeat Form" Repeating="Yes">
+				<ItemGroupRef ItemGroupOID="ItemGroupOID.rk" Mandatory="No"/>
+			</FormDef>
+			<FormDef OID="FormOID.at" Name="All Types Form" Repeating="Yes">
+				<ItemGroupRef ItemGroupOID="ItemGroupOID.at"    Mandatory="No"/>
+				<ItemGroupRef ItemGroupOID="ItemGroupOID.at.nv" Mandatory="No"/>
+				<ItemGroupRef ItemGroupOID="ItemGroupOID.at.cc" Mandatory="No"/>
+				<ItemGroupRef ItemGroupOID="ItemGroupOID.at.iv" Mandatory="No"/>
+			</FormDef>
+                        
+			<!-- ########## ***** ItemGroupDef ***** ########## -->
+			<ItemGroupDef OID="ItemGroupOID.1" Name="1.ItemGroup" Repeating="No">
+				<ItemRef ItemOID="ItemOID.2" Mandatory="Yes"/>
+			</ItemGroupDef>
+			<ItemGroupDef OID="ItemGroupOID.2" Name="2.ItemGroup" Repeating="No">
+				<ItemRef ItemOID="ItemOID.1" Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.3" Mandatory="Yes"/>
+			</ItemGroupDef>
+			<ItemGroupDef OID="ItemGroupOID.3" Name="3.ItemGroup" Repeating="No">
+				<ItemRef ItemOID="ItemOID.2" Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.3" Mandatory="Yes"/>
+			</ItemGroupDef>
+			<ItemGroupDef OID="ItemGroupOID.rk" Name="Repeat ItemGroup" Repeating="Yes">
+				<ItemRef ItemOID="ItemOID.rk.boolean" Mandatory="Yes"/>
+			</ItemGroupDef>
+			<!-- All Types Test -->
+			<ItemGroupDef OID="ItemGroupOID.at" Name="All Types ItemGroup" Repeating="Yes">
+				<ItemRef ItemOID="ItemOID.at.boolean"       Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.integer"       Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.float"         Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.double"        Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.string"        Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.text"          Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.date"          Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.time"          Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.datetime"      Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.partialDate"   Mandatory="Yes"/>
+                <ItemRef ItemOID="ItemOID.at.cl.integer.ei" Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cl.float.ei"   Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cl.string.ei"  Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cl.text.ei"    Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cl.integer.ci" Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cl.float.ci"   Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cl.string.ci"  Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cl.text.ci"    Mandatory="Yes"/>
+			</ItemGroupDef>
+				<!-- No Values (AT) -->
+			<ItemGroupDef OID="ItemGroupOID.at.nv" Name=" No Values (At) ItemGroup" Repeating="Yes">
+				<ItemRef ItemOID="ItemOID.at.nv.boolean"     Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.integer"     Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.float"       Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.double"      Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.string"      Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.text"        Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.date"        Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.time"        Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.datetime"    Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.partialDate" Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.cl.integer.ei" Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.cl.float.ei"   Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.cl.string.ei"  Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.cl.text.ei"    Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.cl.integer.ci" Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.cl.float.ci"   Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.cl.string.ci"  Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.nv.cl.text.ci"    Mandatory="Yes"/>
+			</ItemGroupDef>	
+				<!-- Corner Cases (AT) -->
+			<ItemGroupDef OID="ItemGroupOID.at.cc" Name="Corner Cases (AT) ItemGroup" Repeating="Yes">
+			    <ItemRef ItemOID="ItemOID.at.cc.integer.1"  Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cc.float.1"    Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cc.double.1"   Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cc.string.1"   Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cc.string.2"   Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cc.text.1"     Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cc.text.2"     Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cc.date.1"     Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cc.time.1"     Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cc.datetime.1" Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cc.cl.float.ci.1"   Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cc.cl.float.ci.2"   Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cc.cl.float.ci.10"  Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cc.cl.float.ci.15"  Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.cc.cl.string.ci.bc" Mandatory="Yes"/>
+			</ItemGroupDef>
+				<!-- Invalid Values (AT) -->
+			<ItemGroupDef OID="ItemGroupOID.at.iv" Name="Invalid Values (AT) ItemGroup" Repeating="Yes">
+				<ItemRef ItemOID="ItemOID.at.iv.boolean"  Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.iv.integer"  Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.iv.float"    Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.iv.double"   Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.iv.time"     Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.iv.date"     Mandatory="Yes"/>
+				<ItemRef ItemOID="ItemOID.at.iv.datetime" Mandatory="Yes"/>
+			</ItemGroupDef>
+
+			<!-- ********************************************* -->
+			<!-- ****************** ItemDef ****************** -->
+			<ItemDef OID="ItemOID.1" Name="1.Item" DataType="integer" Length="5">
+				<CodeListRef CodeListOID="CodeList.at.integer.ei"/>
+				<Question><TranslatedText xml:lang="en">This is a question</TranslatedText></Question>
+			</ItemDef>
+			<ItemDef OID="ItemOID.2" Name="2.Item" DataType="float" Length="5" SignificantDigits="1" />
+			<ItemDef OID="ItemOID.3" Name="3.Item" DataType="text" Length="5">
+				<CodeListRef CodeListOID="CodeList.at.integer.ei"/>
+				<Question><TranslatedText xml:lang="en">This is also a question</TranslatedText></Question>
+			</ItemDef>
+			<ItemDef OID="ItemOID.rk.boolean"     Name="Boolean Item"      DataType="boolean" />
+			<!-- All Types Test -->
+			<ItemDef OID="ItemOID.at.boolean"     Name="Boolean Item"      DataType="boolean" />
+			<ItemDef OID="ItemOID.at.integer"     Name="Integer Item"      DataType="integer" />
+			<ItemDef OID="ItemOID.at.float"       Name="Float Item"        DataType="float" />
+			<ItemDef OID="ItemOID.at.double"      Name="Double Item"       DataType="double" />
+			<ItemDef OID="ItemOID.at.string"      Name="String Item"       DataType="string" />
+			<ItemDef OID="ItemOID.at.text"        Name="Text Item"         DataType="text" />
+			<ItemDef OID="ItemOID.at.date"        Name="Date Item"         DataType="date" />
+			<ItemDef OID="ItemOID.at.time"        Name="Time Item"         DataType="time" />
+			<ItemDef OID="ItemOID.at.datetime"    Name="Datetime Item"     DataType="datetime" />
+			<ItemDef OID="ItemOID.at.partialDate" Name="Partial Date Item" DataType="partialDate" />
+			<ItemDef OID="ItemOID.at.cl.integer.ei" Name="Integer CL-E Item" DataType="integer" >
+				<CodeListRef CodeListOID="CodeList.at.integer.ei"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.cl.float.ei"   Name="Float CL-E Item"   DataType="float" >
+				<CodeListRef CodeListOID="CodeList.at.float.ei"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.cl.string.ei"  Name="String CL-E Item"  DataType="string" >
+				<CodeListRef CodeListOID="CodeList.at.string.ei"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.cl.text.ei"    Name="Text CL-E Item"    DataType="text" >
+				<CodeListRef CodeListOID="CodeList.at.text.ei"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.cl.integer.ci" Name="Integer CL-C Item" DataType="integer" >
+				<CodeListRef CodeListOID="CodeList.at.integer.ci"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.cl.float.ci"   Name="Float CL-C Item"   DataType="float" >
+				<CodeListRef CodeListOID="CodeList.at.float.ci"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.cl.string.ci"  Name="String CL-C Item"  DataType="string" >
+				<CodeListRef CodeListOID="CodeList.at.string.ci"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.cl.text.ci"    Name="Text CL-C Item"    DataType="text" >
+				<CodeListRef CodeListOID="CodeList.at.text.ci"/>
+			</ItemDef>
+
+				<!-- No Values (AT) -->
+			<ItemDef OID="ItemOID.at.nv.boolean"     Name="Boolean Item"      DataType="boolean" />	
+			<ItemDef OID="ItemOID.at.nv.integer"     Name="Integer Item"      DataType="integer" />	
+			<ItemDef OID="ItemOID.at.nv.float"       Name="Float Item"        DataType="float" />	
+			<ItemDef OID="ItemOID.at.nv.double"      Name="Double Item"       DataType="double" />
+			<ItemDef OID="ItemOID.at.nv.string"      Name="String Item"       DataType="string" />
+			<ItemDef OID="ItemOID.at.nv.text"        Name="Text Item"         DataType="text" />
+			<ItemDef OID="ItemOID.at.nv.date"        Name="Date Item"         DataType="date" />
+			<ItemDef OID="ItemOID.at.nv.time"        Name="Time Item"         DataType="time" />
+			<ItemDef OID="ItemOID.at.nv.datetime"    Name="Datetime Item"     DataType="datetime" />
+			<ItemDef OID="ItemOID.at.nv.partialDate" Name="Partial Date Item" DataType="partialDate" />
+			<ItemDef OID="ItemOID.at.nv.cl.integer.ei" Name="Integer CL-E Item" DataType="integer" >
+				<CodeListRef CodeListOID="CodeList.at.integer.ei"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.nv.cl.float.ei"   Name="Float CL-E Item"   DataType="float" >
+				<CodeListRef CodeListOID="CodeList.at.float.ei"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.nv.cl.string.ei"  Name="String CL-E Item"  DataType="string" >
+				<CodeListRef CodeListOID="CodeList.at.string.ei"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.nv.cl.text.ei"    Name="Text CL-E Item"    DataType="text" >
+				<CodeListRef CodeListOID="CodeList.at.text.ei"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.nv.cl.integer.ci" Name="Integer CL-C Item" DataType="integer" >
+				<CodeListRef CodeListOID="CodeList.at.integer.ci"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.nv.cl.float.ci"   Name="Float CL-C Item"   DataType="float" >
+				<CodeListRef CodeListOID="CodeList.at.float.ci"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.nv.cl.string.ci"  Name="String CL-C Item"  DataType="string" >
+				<CodeListRef CodeListOID="CodeList.at.string.ci"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.nv.cl.text.ci"    Name="Text CL-C Item"    DataType="text" >
+				<CodeListRef CodeListOID="CodeList.at.text.ci"/>
+			</ItemDef>
+
+				<!-- Corner Cases (AT) -->
+			<ItemDef OID="ItemOID.at.cc.integer.1"   Name="Integer Item"      DataType="integer" />
+			<ItemDef OID="ItemOID.at.cc.float.1"     Name="Float Item"        DataType="float" />
+			<ItemDef OID="ItemOID.at.cc.double.1"    Name="Double Item"       DataType="double" />
+			<ItemDef OID="ItemOID.at.cc.string.1"    Name="String Item"       DataType="string" />
+			<ItemDef OID="ItemOID.at.cc.string.2"    Name="String Item"       DataType="string" />
+			<ItemDef OID="ItemOID.at.cc.text.1"      Name="Text Item"         DataType="text" />
+			<ItemDef OID="ItemOID.at.cc.text.2"      Name="Text Item"         DataType="text" />
+			<ItemDef OID="ItemOID.at.cc.date.1"      Name="Date Item"         DataType="date" />
+			<ItemDef OID="ItemOID.at.cc.time.1"      Name="Time Item"         DataType="time" />
+			<ItemDef OID="ItemOID.at.cc.datetime.1"  Name="Datetime Item"     DataType="datetime" />
+			<ItemDef OID="ItemOID.at.cc.cl.float.ci.1"   Name="Float CL-C Item"   DataType="float" >
+				<CodeListRef CodeListOID="CodeList.at.cc.float.ci"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.cc.cl.float.ci.2"   Name="Float CL-C Item"   DataType="float" >
+				<CodeListRef CodeListOID="CodeList.at.cc.float.ci"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.cc.cl.float.ci.10"  Name="Float CL-C Item"   DataType="float" >
+				<CodeListRef CodeListOID="CodeList.at.cc.float.ci"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.cc.cl.float.ci.15"  Name="Float CL-C Item"   DataType="float" >
+				<CodeListRef CodeListOID="CodeList.at.cc.float.ci"/>
+			</ItemDef>
+			<ItemDef OID="ItemOID.at.cc.cl.string.ci.bc"  Name="B/\%+Cha,ac?er CL=C #em"   DataType="string" >
+				<CodeListRef CodeListOID="CodeList.at.cc.string.ci.bc"/>
+			</ItemDef>
+
+				<!-- Invalid Values (AT) -->
+			<ItemDef OID="ItemOID.at.iv.boolean"   Name="Boolean Item"   DataType="boolean" />
+			<ItemDef OID="ItemOID.at.iv.integer"   Name="Integer Item"   DataType="integer" />
+			<ItemDef OID="ItemOID.at.iv.float"     Name="Float Item"     DataType="float" />
+			<ItemDef OID="ItemOID.at.iv.double"    Name="Double Item"    DataType="double" />
+			<ItemDef OID="ItemOID.at.iv.time"      Name="Time Item"      DataType="time" />
+			<ItemDef OID="ItemOID.at.iv.date"      Name="Date Item"      DataType="date" />
+			<ItemDef OID="ItemOID.at.iv.datetime"  Name="Datetime Item"  DataType="datetime" />
+
+			<!-- CodeList Definitions -->
+			<CodeList OID="CodeList.at.integer.ei" Name="Enumerated Integer List" DataType="integer">
+				<EnumeratedItem CodedValue="1"/>
+				<EnumeratedItem CodedValue="2"/>
+				<EnumeratedItem CodedValue="3"/>
+			</CodeList>
+			<CodeList OID="CodeList.at.float.ei" Name="Enumerated Float List" DataType="float">
+				<EnumeratedItem CodedValue="1.1"/>
+				<EnumeratedItem CodedValue="2.2"/>
+				<EnumeratedItem CodedValue="3.3"/>
+			</CodeList>
+			<CodeList OID="CodeList.at.string.ei" Name="Enumerated String List" DataType="string">
+				<EnumeratedItem CodedValue="Apple"/>
+				<EnumeratedItem CodedValue="Peach"/>
+				<EnumeratedItem CodedValue="Pear"/>
+			</CodeList>
+			<CodeList OID="CodeList.at.text.ei" Name="Enumerated Text List" DataType="text">
+				<EnumeratedItem CodedValue="Apple Juice"/>
+				<EnumeratedItem CodedValue="Peach Juice"/>
+				<EnumeratedItem CodedValue="Pear Juice"/>
+			</CodeList>
+			<CodeList OID="CodeList.at.integer.ci" Name="CodeList Integer List" DataType="integer">
+				<CodeListItem CodedValue="1"><Decode><TranslatedText xml:lang="en">one</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="2"><Decode><TranslatedText xml:lang="en">two</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="3"><Decode><TranslatedText xml:lang="en">three</TranslatedText></Decode></CodeListItem>
+			</CodeList>
+			<CodeList OID="CodeList.at.float.ci" Name="CodeList Float List" DataType="float">
+				<CodeListItem CodedValue="1.1"><Decode><TranslatedText xml:lang="en">one</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="2.2"><Decode><TranslatedText xml:lang="en">two</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="3.3"><Decode><TranslatedText xml:lang="en">three</TranslatedText></Decode></CodeListItem>
+			</CodeList>
+			<CodeList OID="CodeList.at.string.ci" Name="CodeList String List" DataType="string">
+				<CodeListItem CodedValue="Apple"><Decode><TranslatedText xml:lang="de">Apfel</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="Peach"><Decode><TranslatedText xml:lang="de">Pfirsich</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="Pear"><Decode> <TranslatedText xml:lang="de">Birne</TranslatedText></Decode></CodeListItem>
+			</CodeList>
+			<CodeList OID="CodeList.at.text.ci" Name="CodeList Text List" DataType="text">
+				<CodeListItem CodedValue="Apple Juice"><Decode><TranslatedText xml:lang="de">Saft des Apfels</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="Peach Juice"><Decode><TranslatedText xml:lang="de">Saft des Pfirsichs</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="Pear Juice"> <Decode><TranslatedText xml:lang="de">Saft der Birne</TranslatedText></Decode></CodeListItem>
+			</CodeList>
+			<CodeList OID="CodeList.at.cc.float.ci" Name="CodeList Float (CC) List" DataType="float">
+				<CodeListItem CodedValue="1.1">  <Decode><TranslatedText xml:lang="en">one</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="2.2">  <Decode><TranslatedText xml:lang="en">two</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="3.3">  <Decode><TranslatedText xml:lang="en">three</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="4.4">  <Decode><TranslatedText xml:lang="en">four</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="5.5">  <Decode><TranslatedText xml:lang="en">five</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="6.6">  <Decode><TranslatedText xml:lang="en">six</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="7.7">  <Decode><TranslatedText xml:lang="en">seven</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="8.8">  <Decode><TranslatedText xml:lang="en">eight</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="9.9">  <Decode><TranslatedText xml:lang="en">nine</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="10.10"><Decode><TranslatedText xml:lang="en">ten</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="11.11"><Decode><TranslatedText xml:lang="en">eleven</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="12.12"><Decode><TranslatedText xml:lang="en">twelve</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="13.13"><Decode><TranslatedText xml:lang="en">thirteen</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="14.14"><Decode><TranslatedText xml:lang="en">fourteen</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="15.15"><Decode><TranslatedText xml:lang="en">fifteen</TranslatedText></Decode></CodeListItem>
+			</CodeList>
+			<CodeList OID="CodeList.at.cc.string.ci.bc" Name="B/\%+Cha,ac?er #ist" DataType="string">
+				<CodeListItem CodedValue="/\pple#Ju,ce"><Decode><TranslatedText xml:lang="de">Saf?#des#/\pfels</TranslatedText></Decode></CodeListItem>
+				<CodeListItem CodedValue="Peach+Ju,ce"><Decode><TranslatedText xml:lang="de">Saf?+des+Pfirsichs</TranslatedText></Decode></CodeListItem>				
+				<CodeListItem CodedValue="Pear=Ju,ce"> <Decode><TranslatedText xml:lang="de">Saf?=der=Birne</TranslatedText></Decode></CodeListItem>
+			</CodeList>
+		</MetaDataVersion>
+	</Study>
+
+
+	<!--  Clinical Data  -->
+	<ClinicalData StudyOID="TestStudyOID" MetaDataVersionOID="TestMetaDataOID">
+		<!-- Subject 1 -->
+		<SubjectData SubjectKey="1">
+			<StudyEventData StudyEventOID="StudyEventOID.1">
+				<FormData FormOID="FormOID.1" >
+					<ItemGroupData ItemGroupOID="ItemGroupOID.1">
+						<ItemData ItemOID="ItemOID.1" Value="11111" />
+						<ItemData ItemOID="ItemOID.2" Value="1111.2" />   
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.2">
+						<ItemData ItemOID="ItemOID.1" Value="11121" />
+						<ItemData ItemOID="ItemOID.3" Value="11123" />   
+					</ItemGroupData>
+				</FormData>
+				<FormData FormOID="FormOID.2" >
+					<ItemGroupData ItemGroupOID="ItemGroupOID.1">
+						<ItemData ItemOID="ItemOID.1" Value="11211" />
+						<ItemData ItemOID="ItemOID.2" Value="1121.2" />   
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.3">
+						<ItemData ItemOID="ItemOID.2" Value="1123.2" />
+						<ItemData ItemOID="ItemOID.3" Value="11233" /> 
+					</ItemGroupData>
+				</FormData>
+			</StudyEventData>
+			<StudyEventData StudyEventOID="StudyEventOID.2">
+				<FormData FormOID="FormOID.1" >
+					<ItemGroupData ItemGroupOID="ItemGroupOID.1">
+						<ItemData ItemOID="ItemOID.1" Value="12111" />
+						<ItemData ItemOID="ItemOID.2" Value="1211.2" />   
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.2">
+						<ItemData ItemOID="ItemOID.1" Value="12121" />
+						<ItemData ItemOID="ItemOID.3" Value="12123" />   
+					</ItemGroupData>
+				</FormData>
+				<FormData FormOID="FormOID.3" >
+					<ItemGroupData ItemGroupOID="ItemGroupOID.2">
+						<ItemData ItemOID="ItemOID.1" Value="12321" />
+						<ItemData ItemOID="ItemOID.3" Value="12323" />   
+					</ItemGroupData>
+				</FormData>
+			</StudyEventData>
+		</SubjectData>
+		<!-- Subject 2 -->
+		<SubjectData SubjectKey="2">
+			<StudyEventData StudyEventOID="StudyEventOID.1">
+				<FormData FormOID="FormOID.1" >
+					<ItemGroupData ItemGroupOID="ItemGroupOID.1">
+						<ItemData ItemOID="ItemOID.1" Value="21111" />
+						<ItemData ItemOID="ItemOID.2" Value="2111.2" />   
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.2">
+						<ItemData ItemOID="ItemOID.1" Value="21121" />
+						<ItemData ItemOID="ItemOID.3" Value="21123" />   
+					</ItemGroupData>
+				</FormData>
+				<FormData FormOID="FormOID.2" >
+					<ItemGroupData ItemGroupOID="ItemGroupOID.1">
+						<ItemData ItemOID="ItemOID.1" Value="21211" />
+						<ItemData ItemOID="ItemOID.2" Value="2121.2" />   
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.3">
+						<ItemData ItemOID="ItemOID.2" Value="2123.2" />                          
+					</ItemGroupData>
+				</FormData>
+			</StudyEventData>
+			<StudyEventData StudyEventOID="StudyEventOID.2">
+				<FormData FormOID="FormOID.1" >
+					<ItemGroupData ItemGroupOID="ItemGroupOID.1">
+						<ItemData ItemOID="ItemOID.1" Value="22111" />
+						<ItemData ItemOID="ItemOID.2" Value="2211.2" />   
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.2">
+						<ItemData ItemOID="ItemOID.1" Value="22121" />
+						<ItemData ItemOID="ItemOID.3" Value="22123" />   
+					</ItemGroupData>
+				</FormData>
+				<FormData FormOID="FormOID.3" >
+					<ItemGroupData ItemGroupOID="ItemGroupOID.2">
+						<ItemData ItemOID="ItemOID.1" Value="" />
+						<ItemData ItemOID="ItemOID.3" Value="" />   
+					</ItemGroupData>
+				</FormData>
+			</StudyEventData>
+		</SubjectData>
+		<!-- Subject 3 -->
+		<SubjectData SubjectKey="3">
+			<StudyEventData StudyEventOID="StudyEventOID.1">
+				<FormData FormOID="FormOID.1" >
+					<ItemGroupData ItemGroupOID="ItemGroupOID.1">
+						<ItemData ItemOID="ItemOID.1" Value="31111" />
+						<ItemData ItemOID="ItemOID.2" Value="3111.2" />   
+					</ItemGroupData>
+				</FormData>
+			</StudyEventData>
+		</SubjectData>
+		<!-- Subjects Repeat Keys -->
+		<SubjectData SubjectKey="rk">
+			<StudyEventData StudyEventOID="StudyEventOID.rk" StudyEventRepeatKey="1">
+				<FormData FormOID="FormOID.rk" FormRepeatKey="1">
+					<ItemGroupData ItemGroupOID="ItemGroupOID.rk" ItemGroupRepeatKey="1">
+						<ItemData ItemOID="ItemOID.rk.boolean" Value="1" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.rk" ItemGroupRepeatKey="2">
+						<ItemData ItemOID="ItemOID.rk.boolean" Value="0" />
+					</ItemGroupData>
+				</FormData>
+				<FormData FormOID="FormOID.rk" FormRepeatKey="2">
+					<ItemGroupData ItemGroupOID="ItemGroupOID.rk" >
+						<ItemData ItemOID="ItemOID.rk.boolean" Value="1" />
+					</ItemGroupData>
+				</FormData>
+			</StudyEventData>
+			<StudyEventData StudyEventOID="StudyEventOID.rk" StudyEventRepeatKey="2">
+				<FormData FormOID="FormOID.rk" >
+					<ItemGroupData ItemGroupOID="ItemGroupOID.rk" >
+						<ItemData ItemOID="ItemOID.rk.boolean" Value="1" />
+					</ItemGroupData>
+				</FormData>
+			</StudyEventData>
+		</SubjectData>
+		<!-- Subject All Types -->
+		<SubjectData SubjectKey="at">
+			<StudyEventData StudyEventOID="StudyEventOID.at">
+				<FormData FormOID="FormOID.at" >
+					<!-- Test All Types-->
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at" ItemGroupRepeatKey="1">
+						<ItemData ItemOID="ItemOID.at.boolean"     Value="true"  />
+						<ItemData ItemOID="ItemOID.at.integer"     Value="11"    />
+						<ItemData ItemOID="ItemOID.at.float"       Value="11.11" />
+						<ItemData ItemOID="ItemOID.at.double"      Value="22.22" />
+						<ItemData ItemOID="ItemOID.at.string"      Value="Apple" />
+						<ItemData ItemOID="ItemOID.at.text"        Value="Apple Juice" />
+						<ItemData ItemOID="ItemOID.at.date"        Value="1920-09-09" />
+						<ItemData ItemOID="ItemOID.at.time"        Value="00:00:00" />
+						<ItemData ItemOID="ItemOID.at.datetime"    Value="1920-05-05T10:10:10" />
+						<ItemData ItemOID="ItemOID.at.partialDate" Value="2000" />
+						<ItemData ItemOID="ItemOID.at.cl.integer.ei" Value="1" />
+						<ItemData ItemOID="ItemOID.at.cl.float.ei"   Value="1.1" />
+						<ItemData ItemOID="ItemOID.at.cl.string.ei"  Value="Apple" />
+						<ItemData ItemOID="ItemOID.at.cl.text.ei"    Value="Apple Juice" />
+						<ItemData ItemOID="ItemOID.at.cl.integer.ci" Value="1" />
+						<ItemData ItemOID="ItemOID.at.cl.float.ci"   Value="1.1" />
+						<ItemData ItemOID="ItemOID.at.cl.string.ci"  Value="Apple" />
+						<ItemData ItemOID="ItemOID.at.cl.text.ci"    Value="Apple Juice" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at" ItemGroupRepeatKey="2">
+						<ItemData ItemOID="ItemOID.at.boolean"  Value="false" />
+						<ItemData ItemOID="ItemOID.at.integer"  Value="111" />
+						<ItemData ItemOID="ItemOID.at.float"    Value="111.11" />
+						<ItemData ItemOID="ItemOID.at.double"   Value="222.22" />
+						<ItemData ItemOID="ItemOID.at.string"   Value="Peach" />
+						<ItemData ItemOID="ItemOID.at.text"     Value="Peach Juice" />
+						<ItemData ItemOID="ItemOID.at.date"     Value="2010-05-05" />
+						<ItemData ItemOID="ItemOID.at.time"     Value="20:00:00" />
+						<ItemData ItemOID="ItemOID.at.datetime" Value="2010-09-09T20:20:20" />
+						<ItemData ItemOID="ItemOID.at.cl.integer.ei" Value="2" />
+						<ItemData ItemOID="ItemOID.at.cl.float.ei"   Value="2.2" />
+						<ItemData ItemOID="ItemOID.at.cl.string.ei"  Value="Peach" />
+						<ItemData ItemOID="ItemOID.at.cl.text.ei"    Value="Peach Juice" />
+						<ItemData ItemOID="ItemOID.at.cl.integer.ci" Value="2" />
+						<ItemData ItemOID="ItemOID.at.cl.float.ci"   Value="2.2" />
+						<ItemData ItemOID="ItemOID.at.cl.string.ci"  Value="Peach" />
+						<ItemData ItemOID="ItemOID.at.cl.text.ci"    Value="Peach Juice" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at" ItemGroupRepeatKey="3">
+						<ItemData ItemOID="ItemOID.at.boolean"  Value="1" />
+						<ItemData ItemOID="ItemOID.at.integer"  Value="61" />
+						<ItemData ItemOID="ItemOID.at.float"    Value="61.11" />
+						<ItemData ItemOID="ItemOID.at.double"   Value="122.22" />
+						<ItemData ItemOID="ItemOID.at.string"   Value="Pear" />
+						<ItemData ItemOID="ItemOID.at.text"     Value="Pear Juice" />
+						<ItemData ItemOID="ItemOID.at.date"     Value="1985-10-30" />
+						<ItemData ItemOID="ItemOID.at.time"     Value="05:00:00" />
+						<ItemData ItemOID="ItemOID.at.datetime" Value="1985-10-30T00:30:30" />
+						<ItemData ItemOID="ItemOID.at.cl.integer.ei" Value="3" />
+						<ItemData ItemOID="ItemOID.at.cl.float.ei"   Value="3.3" />
+						<ItemData ItemOID="ItemOID.at.cl.string.ei"  Value="Pear" />
+						<ItemData ItemOID="ItemOID.at.cl.text.ei"    Value="Pear Juice" />
+						<ItemData ItemOID="ItemOID.at.cl.integer.ci" Value="3" />
+						<ItemData ItemOID="ItemOID.at.cl.float.ci"   Value="3.3" />
+						<ItemData ItemOID="ItemOID.at.cl.string.ci"  Value="Pear" />
+						<ItemData ItemOID="ItemOID.at.cl.text.ci"    Value="Pear Juice" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at" ItemGroupRepeatKey="4">
+						<ItemData ItemOID="ItemOID.at.boolean"  Value="0" />
+						<ItemData ItemOID="ItemOID.at.integer"  Value="61" />
+						<ItemData ItemOID="ItemOID.at.float"    Value="61.11" />
+						<ItemData ItemOID="ItemOID.at.double"   Value="122.22" />
+						<ItemData ItemOID="ItemOID.at.string"   Value="Peach" />
+						<ItemData ItemOID="ItemOID.at.text"     Value="Peach Juice" />
+						<ItemData ItemOID="ItemOID.at.date"     Value="1985-10-30" />
+						<ItemData ItemOID="ItemOID.at.time"     Value="05:00:00" />
+						<ItemData ItemOID="ItemOID.at.datetime" Value="1985-10-30T00:30:30" />
+						<ItemData ItemOID="ItemOID.at.cl.integer.ei" Value="1" />
+						<ItemData ItemOID="ItemOID.at.cl.float.ei"   Value="1.1" />
+						<ItemData ItemOID="ItemOID.at.cl.string.ei"  Value="Apple" />
+						<ItemData ItemOID="ItemOID.at.cl.text.ei"    Value="Apple Juice" />
+						<ItemData ItemOID="ItemOID.at.cl.integer.ci" Value="1" />
+						<ItemData ItemOID="ItemOID.at.cl.float.ci"   Value="1.1" />
+						<ItemData ItemOID="ItemOID.at.cl.string.ci"  Value="Apple" />
+						<ItemData ItemOID="ItemOID.at.cl.text.ci"    Value="Apple Juice" />
+					</ItemGroupData>
+					<!-- No Values (AT) -->
+						<!-- ...  -->
+					<!-- Corner Cases (AT) -->
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.cc" ItemGroupRepeatKey="1">
+						<ItemData ItemOID="ItemOID.at.cc.integer.1"     Value="11"    />
+						<ItemData ItemOID="ItemOID.at.cc.float.1"       Value="11.11" />
+						<ItemData ItemOID="ItemOID.at.cc.double.1"      Value="22.22" />
+						<ItemData ItemOID="ItemOID.at.cc.string.1"      Value="Apple" />
+						<ItemData ItemOID="ItemOID.at.cc.string.2"      Value="Apple" />
+						<ItemData ItemOID="ItemOID.at.cc.text.1"        Value="Apple Juice" />
+						<ItemData ItemOID="ItemOID.at.cc.text.2"        Value="Apple Juice" />
+						<ItemData ItemOID="ItemOID.at.cc.date.1"        Value="1920-09-09" />
+						<ItemData ItemOID="ItemOID.at.cc.time.1"        Value="00:00:00" />
+						<ItemData ItemOID="ItemOID.at.cc.datetime.1"    Value="1920-05-05T10:10:10" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.1"  Value="15.15" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.2"  Value="15.15" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.10" Value="15.15" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.15" Value="15.15" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.string.ci.bc" Value="/\pple#Ju,ce" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.cc" ItemGroupRepeatKey="2">
+						<ItemData ItemOID="ItemOID.at.cc.string.2"      Value="Peach" />
+						<ItemData ItemOID="ItemOID.at.cc.text.2"        Value="Peach Juice" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.2"  Value="14.14" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.10" Value="14.14" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.15" Value="14.14" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.string.ci.bc" Value="Peach+Ju,ce" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.cc" ItemGroupRepeatKey="3">
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.10" Value="13.13" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.15" Value="13.13" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.string.ci.bc" Value="Pear=Ju,ce" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.cc" ItemGroupRepeatKey="4">
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.10" Value="12.12" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.15" Value="12.12" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.string.ci.bc" Value="/\pple#Ju,ce" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.cc" ItemGroupRepeatKey="5">
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.10" Value="11.11" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.15" Value="11.11" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.cc" ItemGroupRepeatKey="6">
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.10" Value="10.10" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.15" Value="10.10" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.cc" ItemGroupRepeatKey="7">
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.10" Value="9.9" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.15" Value="9.9" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.cc" ItemGroupRepeatKey="8">
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.10" Value="8.8" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.15" Value="8.8" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.cc" ItemGroupRepeatKey="9">
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.10" Value="7.7" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.15" Value="7.7" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.cc" ItemGroupRepeatKey="10">
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.10" Value="6.6" />
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.15" Value="6.6" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.cc" ItemGroupRepeatKey="11">
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.15" Value="5.5" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.cc" ItemGroupRepeatKey="12">
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.15" Value="4.4" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.cc" ItemGroupRepeatKey="13">
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.15" Value="3.3" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.cc" ItemGroupRepeatKey="14">
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.15" Value="2.2" />
+					</ItemGroupData>
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.cc" ItemGroupRepeatKey="15">
+						<ItemData ItemOID="ItemOID.at.cc.cl.float.ci.15" Value="1.1" />
+					</ItemGroupData>
+					<!-- Invalid Values (AT) -->
+					<ItemGroupData ItemGroupOID="ItemGroupOID.at.iv" >
+						<ItemData ItemOID="ItemOID.at.iv.boolean" Value="Birne" />
+						<ItemData ItemOID="ItemOID.at.iv.integer" Value="Birne" />
+						<ItemData ItemOID="ItemOID.at.iv.float" Value="Birne" />
+						<ItemData ItemOID="ItemOID.at.iv.double" Value="Birne" />
+						<ItemData ItemOID="ItemOID.at.iv.time" Value="Birne" />
+						<ItemData ItemOID="ItemOID.at.iv.date" Value="Birne" />
+						<ItemData ItemOID="ItemOID.at.iv.date" Value="1899-12-31" />
+						<ItemData ItemOID="ItemOID.at.iv.datetime" Value="Birne" />
+						<ItemData ItemOID="ItemOID.at.iv.date" Value="1899-12-31T10:10:10" />
+					</ItemGroupData>
+				</FormData>
+			</StudyEventData>
+		</SubjectData>
+	</ClinicalData>
+</ODM>
