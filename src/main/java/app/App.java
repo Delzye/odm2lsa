@@ -15,15 +15,12 @@ public class App {
 		BasicConfigurator.configure();
 		long beforeUsedMem = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 
-		// There have to be 1 or 2 parameters, LSA-File and output path
-		// if (args.length == 0 || args.length > 2) {
-		// 	invalid_params();
-		// }
-		String path = "./src/main/xml/ODMTestfile.xml";
-		String se = "StudyEventOID.1";
-		String form = "FormOID.1";
-		OdmConverter odm_converter = new OdmConverter();
-		odm_converter.convert(path, se, form);
+		// There have to be 2 or 3 parameters, Path to ODM-File, FormOID and optionally an output path
+		if (args.length < 2 || args.length > 3) {
+			invalid_params();
+		}
+		String output_path = args.length == 2 ? "./" : args[2];
+		OdmConverter.convert(args[0], args[1], output_path);
 
 		// Performance Output:
 		long afterUsedMem = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
@@ -32,6 +29,6 @@ public class App {
 
 	public static void invalid_params()
 	{
-		log.info("Usage: java -jar <lsa2odm-jar-name> <.lsa-File> <Output-Path (optional)>");
+		log.info("Usage: java -jar <odm2lss-jar-name> <ODM-File> <FormOID> <Output-Path (optional)>");
 	}
 }

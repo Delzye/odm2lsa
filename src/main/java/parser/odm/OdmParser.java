@@ -20,14 +20,10 @@ public class OdmParser
 	File odm;
 	Document doc;
 
-	public OdmParser(String path)
+	public OdmParser(File odm)
 	{
 		survey = new Survey();
-		odm = new File(path);
-		if (!odm.exists()) {
-			log.error("ODM File does not exist!");
-			System.exit(1);
-		}
+		this.odm = odm;
 	}
 
 	public Survey parseFile(String form_oid)
