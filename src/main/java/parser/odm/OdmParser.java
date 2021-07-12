@@ -69,12 +69,12 @@ public class OdmParser
 		// List of all ItemGroupOIDs
 		ArrayList<String> ig_oids = new ArrayList<>();
 		@SuppressWarnings("unchecked")
-		List<Element> ig_refs = form.selectNodes("*");
+		List<Element> ig_refs = form.selectNodes("*[name()='ItemGroupRef']");
 		for (Element ref : ig_refs) {
 			ig_oids.add(ref.attributeValue("ItemGroupOID"));
 		}
 
-		// List of all ItemGroups
+		// List of all ItemGroups of the form
 		ArrayList<Element> igs = new ArrayList<>();
 		@SuppressWarnings("unchecked")
 		List<Element> all_igs = doc.selectNodes("//*[name()='ItemGroupDef']");
@@ -86,7 +86,7 @@ public class OdmParser
 
 		// Add question groups and generate list of Items
 		HashMap<String, String> ig_map = new HashMap<>();
-		// Key: ItemOID Value: ItemGroupOID
+		// Key: ItemOID Value: List of ItemGroupOIDs
 		HashMap<String, List<String>> q_oids = new HashMap<>();
 
 		int x = 1;
@@ -98,7 +98,7 @@ public class OdmParser
 			// An Item does not need a question, so all items have to be checked
 
 			@SuppressWarnings("unchecked")
-			List<Element> q_list = ig.elements();
+			List<Element> q_list = ig.selectNodes("*[name()='ItemRef']");
 			List<String> all_q_oids = q_list.stream().map(e -> e.attributeValue("ItemOID")).collect(Collectors.toList());
 			boolean contains_question = all_items.stream().filter(e -> all_q_oids.contains(e.attributeValue("OID"))).anyMatch(e -> (e.selectSingleNode("*[name()='Question']/*[name()='TranslatedText']") != null));
 
@@ -114,6 +114,7 @@ public class OdmParser
 			survey.addGroup(qg);
 			ig_map.put(ig.attributeValue("OID"), x_str);
 			
+			// Add all Question OIDs of the group to the Map
 			for (String q_ref : all_q_oids) {
 				log.debug("Putting Question " + q_ref + " into group " + x_str + "(" + ig.attributeValue("OID") + ")");
 				List<String> l;
@@ -149,6 +150,13 @@ public class OdmParser
 		HashMap<String, List<String>> cl_oids = new HashMap<>();
 		int x = 1;
 		for (Element item : items) {
+
+			Element q_elem = (Element) item.selectSingleNode("*[name()='Question']/*[name()='TranslatedText']");
+			if (q_elem == null) {
+				log.info("No question Text, continuing");
+				continue;
+			}
+
 			String desc = item.elementText("Description");
 			String oid = item.attributeValue("OID");
 
@@ -171,11 +179,6 @@ public class OdmParser
 				type = "A";
 			}
 
-			Element q_elem = (Element) item.selectSingleNode("*[name()='Question']/*[name()='TranslatedText']");
-			if (q_elem == null) {
-				log.info("No question Text, continuing");
-				continue;
-			}
 			String q_str = q_elem.getText();
 			String l = q_elem.attributeValue("lang");
 
@@ -232,7 +235,7 @@ public class OdmParser
 
 			// find out whether this is a list of EnumeratedItems or CodeListItems
 			// Note: There can be a description and a random amount of aliases, the position of the first Item is unknown, so we have to search the entire list of child elements
-			boolean is_enum_item = elems.stream().map(e -> e.getName()).collect(Collectors.toList()).contains("EnumeratedItem");
+			boolean is_enum_item = elems.get(1).getName().equals("EnumeratedItem");
 			
 			int sortorder = 0;
 			// Iterate through all Items

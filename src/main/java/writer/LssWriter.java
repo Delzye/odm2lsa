@@ -43,6 +43,7 @@ public class LssWriter
 		 * 9: surveys_languagesettings
 		 */
 		Element[] elems = createDocumentRoot();
+
 		addGroups(elems[2], elems[3]);
 		addQuestions(elems[4], elems[6], elems[7]);
 		addAnswers(elems[0], elems[1]);
@@ -54,7 +55,6 @@ public class LssWriter
 		try{
 			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy:HH-mm-ss");  
 			Date date = new Date();  
-			System.out.println(formatter.format(date));  
 			FileWriter fileWriter = new FileWriter(path + "survey_" + formatter.format(date) + ".lss");
 			OutputFormat format = OutputFormat.createPrettyPrint();
 			XMLWriter writer = new XMLWriter(fileWriter, format);
@@ -199,6 +199,4 @@ public class LssWriter
 		row.addElement("surveyls_title")
 			.addCDATA(survey.getName());
 	}
-
-
 }
