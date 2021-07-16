@@ -14,7 +14,6 @@ public class Question
 	protected String title;
 	protected String mandatory;
 	protected String language;
-	protected String cond; // Do not show the question if the referenced condition evaluates to true
 	// Only for Questions with numerical input
 	protected String float_range_min;
 	protected String float_range_max;
@@ -39,6 +38,5 @@ public class Question
 		this.title = q.title;
 		this.mandatory = q.mandatory;
 		this.language = q.language;
-		this.cond = q.cond;
 	}
 }

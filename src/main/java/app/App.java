@@ -1,7 +1,5 @@
 package app;
 
-import org.apache.log4j.BasicConfigurator;
-
 import lombok.extern.log4j.Log4j;
 
 import java.io.File;
@@ -12,14 +10,13 @@ public class App {
 
     public static void main(String[] args)
     {
-		BasicConfigurator.configure();
 		long beforeUsedMem = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
 
 		// There have to be 2 or 3 parameters, Path to ODM-File, FormOID and optionally an output path
 		if (args.length < 2 || args.length > 3) {
 			invalid_params();
 		}
-		String output_path = args.length == 2 ? "./" : args[2];
+		String output_path = args.length == 2 ? "" : args[2];
 		OdmConverter.convert(args[0], args[1], output_path);
 
 		// Performance Output:

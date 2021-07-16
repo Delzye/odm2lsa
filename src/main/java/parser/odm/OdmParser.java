@@ -29,6 +29,7 @@ public class OdmParser
 	public Survey parseFile(String form_oid)
 	{
 		try{
+			log.info("Reding ODM-File");
 			SAXReader sax_reader = new SAXReader();
 			doc = sax_reader.read(odm);
 			// "//FormDef[@OID='" + form_oid + "']" does not work because of the namespace set in ODM
@@ -39,20 +40,6 @@ public class OdmParser
 			HashMap<String, List<String>> q_oids = parseItemGroups(form);
 			HashMap<String, List<String>> cl_oids = parseItems(form, q_oids);
 			parseCodeLists(form, cl_oids);
-
-			//%%%%%%%%%%%%%%%%%%%%%%%%TMP$%$%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-			
-			for (QuestionGroup qg : survey.getGroups()) {
-				log.info("GroupID " + qg.getGid() + "| GroupName " + qg.getName());
-			}
-			for (Question q : survey.getQuestions()) {
-				log.info("GID " + q.getGid() + " | QID " + q.getQid());
-			}
-			for (AnswerOption ao : survey.getAnswer_list()) {
-				log.info("AnswerID " + ao.getAid() + "| Question " + ao.getQid());
-				log.debug("Language " + ao.getLanguage() + "|| Code " + ao.getCode() + ": Option " + ao.getAnswer());
-			}
-
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			System.exit(1);
@@ -62,6 +49,7 @@ public class OdmParser
 
 	private HashMap<String, List<String>> parseItemGroups(Node form)
 	{
+		log.info("Parsing ItemGroups");
 		// List of all ItemGroupOIDs
 		ArrayList<String> ig_oids = new ArrayList<>();
 		@SuppressWarnings("unchecked")
@@ -130,6 +118,7 @@ public class OdmParser
 
 	private HashMap<String, List<String>> parseItems(Node form, HashMap<String, List<String>> q_oids)
 	{
+		log.info("Parsing items");
 		// List of all relevant Items
 		ArrayList<Element> items = new ArrayList<>();
 		@SuppressWarnings("unchecked")
@@ -147,14 +136,14 @@ public class OdmParser
 		int x = 1;
 		for (Element item : items) {
 
-			Element q_elem = (Element) item.selectSingleNode("*[name()='Question']/*[name()='TranslatedText']");
-			if (q_elem == null) {
-				log.info("No question Text, continuing");
-				continue;
-			}
-
 			String desc = item.elementText("Description");
 			String oid = item.attributeValue("OID");
+
+			Element q_elem = (Element) item.selectSingleNode("*[name()='Question']/*[name()='TranslatedText']");
+			if (q_elem == null) {
+				log.info("No question text in question " + oid + ", continuing");
+				continue;
+			}
 
 			String type;
 			switch (item.attributeValue("DataType")) {
@@ -171,7 +160,6 @@ public class OdmParser
 					log.warn("Question DataType not supported");
 			}
 			if (item.selectSingleNode("*[name()='CodeListRef']") != null) {
-				log.info(oid);
 				type = "A";
 			}
 
@@ -206,6 +194,7 @@ public class OdmParser
 
 	private void parseCodeLists(Node form, HashMap<String, List<String>> cl_oids)
 	{
+		log.info("Parsing CodeLists");
 		// List of all relevant Items
 		ArrayList<Element> code_lists = new ArrayList<>();
 		@SuppressWarnings("unchecked")

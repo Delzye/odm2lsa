@@ -51,6 +51,7 @@ buildNumber.properties
 
 # Special files
 #
-# Too big
 src/main/xml/trivial_text_responses_long.lsr
 src/main/xml/odm.xml
+survey*
+target/

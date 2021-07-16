@@ -14,17 +14,13 @@ public class Survey
 	
 	protected ArrayList<QuestionGroup> groups;
 	protected ArrayList<Question> questions;
-	protected ArrayList<Integer> qid_list;
 	protected ArrayList<AnswerOption> answer_list;
-	protected ArrayList<Condition> cond_list;
 
 	public Survey()
 	{
 		groups = new ArrayList<QuestionGroup>();
 		questions = new ArrayList<Question>();
-		qid_list = new ArrayList<Integer>();
 		answer_list = new ArrayList<>();
-		cond_list = new ArrayList<Condition>();
 	}
 
 	public void addGroup(QuestionGroup qg)
@@ -38,10 +34,6 @@ public class Survey
 	public void addAnswer(AnswerOption ao)
 	{
 		answer_list.add(ao);
-	}
-	public void addCondition(Condition c)
-	{
-		cond_list.add(c);
 	}
 }
 
