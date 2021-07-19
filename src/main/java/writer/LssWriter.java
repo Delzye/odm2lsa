@@ -128,11 +128,13 @@ public class LssWriter
 	private void addGroups(Element groups, Element group)
 	{
 		for (QuestionGroup qg : survey.getGroups()) {
-			groups.addElement("row")
-				  .addElement("gid")
-				  .addCDATA(qg.getGid());
+			Element row = groups.addElement("row");
+			row.addElement("gid")
+				.addCDATA(qg.getGid());
+			row.addElement("group_order")
+				.addCDATA(qg.getGid());
 
-			Element row = group.addElement("row");
+			row = group.addElement("row");
 			row.addElement("id")
 			   .addCDATA(qg.getGid());
 			row.addElement("gid")
@@ -144,6 +146,8 @@ public class LssWriter
 			}
 			row.addElement("language")
 				.addCDATA("en"); // TODO
+			row.addElement("group_order")
+				.addCDATA(qg.getGid());
 		}
 	}
 

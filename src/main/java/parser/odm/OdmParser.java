@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.dom4j.Document;
@@ -40,6 +41,7 @@ public class OdmParser
 			HashMap<String, List<String>> q_oids = parseItemGroups(form);
 			HashMap<String, List<String>> cl_oids = parseItems(form, q_oids);
 			parseCodeLists(form, cl_oids);
+
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			System.exit(1);
@@ -93,7 +95,10 @@ public class OdmParser
 
 			// If the group has at least one question, parse it
 			String x_str = Integer.toString(x);
-			String desc = ig.elementText("Description");
+			String desc = "";
+			if (ig.element("Description") != null) {
+				desc = ig.element("Description").elementText("TranslatedText");
+			}
 			QuestionGroup qg = new QuestionGroup(ig.attributeValue("Name"), x_str, desc);
 			survey.addGroup(qg);
 			ig_map.put(ig.attributeValue("OID"), x_str);
@@ -136,7 +141,10 @@ public class OdmParser
 		int x = 1;
 		for (Element item : items) {
 
-			String desc = item.elementText("Description");
+			String desc = "";
+			if (item.element("Description") != null) {
+				desc = item.element("Description").elementText("TranslatedText");
+			}
 			String oid = item.attributeValue("OID");
 
 			Element q_elem = (Element) item.selectSingleNode("*[name()='Question']/*[name()='TranslatedText']");
@@ -160,7 +168,7 @@ public class OdmParser
 					log.warn("Question DataType not supported");
 			}
 			if (item.selectSingleNode("*[name()='CodeListRef']") != null) {
-				type = "A";
+				type = "L";
 			}
 
 			String q_str = q_elem.getText();
@@ -169,7 +177,7 @@ public class OdmParser
 			for (String gr : q_oids.get(oid)) {
 				String x_str = Integer.toString(x);
 
-				Question q = new Question(x_str, gr, type, q_str, item.attributeValue("Name"), "Y", l);
+				Question q = new Question(x_str, gr, type, q_str, item.attributeValue("Name"), "N", l); //TODO: change mandatory to dynamic
 				q.setHelp(desc);
 				survey.addQuestion(q);
 				item_map.put(item.attributeValue("OID"), x_str);
@@ -194,6 +202,13 @@ public class OdmParser
 
 	private void parseCodeLists(Node form, HashMap<String, List<String>> cl_oids)
 	{
+		for(Map.Entry<String, List<String>> e : cl_oids.entrySet()) {
+			log.debug("CodeList: " + e.getKey());
+			for(String x : e.getValue()) {
+				log.debug("Qid:" + x);
+			}
+		}
+
 		log.info("Parsing CodeLists");
 		// List of all relevant Items
 		ArrayList<Element> code_lists = new ArrayList<>();
@@ -205,7 +220,7 @@ public class OdmParser
 			}
 		}
 
-		int x = 0;
+		int x = 1;
 		String x_str, val, ans, lang;
 		// Iterate through all relevant lists and add them to the survey
 		for (Element code_list : code_lists) {
@@ -220,20 +235,20 @@ public class OdmParser
 
 			// find out whether this is a list of EnumeratedItems or CodeListItems
 			// Note: There can be a description and a random amount of aliases, the position of the first Item is unknown, so we have to search the entire list of child elements
-			boolean is_enum_item = elems.get(1).getName().equals("EnumeratedItem");
+			boolean is_enum_item = elems.get(0).getName().equals("EnumeratedItem");
 			
 			int sortorder = 0;
 			// Iterate through all Items
 			for (Element el : elems) {
 				val = el.attributeValue("CodedValue");
+				lang = "en";
+				// TODO: language not accurate
 				if (is_enum_item) {
 					ans = val;
-					// TODO: language not accurate
-					lang = "en";
 				} else {
-					Element text = (Element) el.selectSingleNode("//*[name()='TranslatedText']");
+					Element text = (Element) el.selectSingleNode("*[name()='Decode']/*[name()='TranslatedText']");
 					ans = text.getText();
-					lang = text.attributeValue("xml:lang");
+					// lang = text.attributeValue("xml:lang");
 				}
 
 				AnswerOption ao = new AnswerOption("", "", lang, val, ans, Integer.toString(sortorder));
