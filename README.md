@@ -14,6 +14,9 @@ There are three parameters:
 2. Form to convert
 3. output path (optional)
 
+Compiling the jar: 'mvn compile assembly:single', executed in the root directory of the project.
+Usage: 'java -jar \<jar-name\> arg1 arg2'
+
 ### In another maven project
 
 You can install this project as a dependency for another project, then import the *OdmConverter* and use its method *convert()*.
